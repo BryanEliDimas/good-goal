@@ -17,6 +17,7 @@ class AddGoal extends Component {
     const {email} = this.props.user // comes from redux
 
     goalRef.push({email, title})
+    this.setState({title: ''})
   }
 
   render() {
@@ -25,7 +26,10 @@ class AddGoal extends Component {
         <div className="form-group">
           <input type="text" className="form-control"
             placeholder="New goal" style={{marginRight: '5px'}}
-            onChange={(e) => this.setState({title: e.target.value})} />
+            onChange={(e) => this.setState({title: e.target.value})}
+            value={this.state.title}
+            onKeyDown={(e) => e.keyCode == 13 ? this.addGoal() : null}
+          />
           <button className="btn btn-success"
             onClick={() => this.addGoal()}
           >Submit</button>
